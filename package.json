@@ -12,13 +12,14 @@
     "url": "git+https://github.com/mmdzov/pmoa.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "mmdzov",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mmdzov/pmoa/issues"
   },
   "homepage": "https://github.com/mmdzov/pmoa#readme",
   "devDependencies": {
+    "@jest/globals": "^29.6.1",
     "@types/axios": "^0.14.0",
     "@types/node": "^20.4.4",
     "jest": "^29.6.1",
@@ -26,6 +27,8 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "node-html-parser": "^6.1.5",
+    "socks-proxy-agent": "^8.0.1"
   }
 }
