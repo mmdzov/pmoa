@@ -2,8 +2,6 @@ const Pmoa = require("pmoa");
 const { ProxyAdapter, SocksAdapter } = require("pmoa/src/proxy");
 const dotenv = require("dotenv");
 
-console.log(Pmoa);
-
 dotenv.config();
 
 const pmoa = new Pmoa(
