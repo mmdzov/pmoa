@@ -19,7 +19,7 @@ test("e-voucher creation", async () => {
   const asyncMock = jest.fn().mockImplementationOnce(async () => {
     const result = await pmoa.eVoucherCreate({
       PAYER_ACCOUNT: "U41708332",
-      AMOUNT: "0.50",
+      AMOUNT: "1.00",
     });
 
     Promise.resolve(result);
