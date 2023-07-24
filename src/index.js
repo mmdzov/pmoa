@@ -25,6 +25,9 @@ class Pmoa {
     }
   }
 
+  /**
+   * @returns {object}
+   */
   async balance() {
     const { data } = await api.get(
       `/acct/balance.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}`,
@@ -39,6 +42,26 @@ class Pmoa {
 
     root.querySelectorAll("input[type='hidden']").forEach((item) => {
       result.object[item.getAttribute("name")] = item.getAttribute("value");
+    });
+
+    return Response({
+      data: result,
+    });
+  }
+
+  /**
+   * @description Account name fetching
+   * @param {string} Account - Your Account ID, like U41701332
+   * @returns {object}
+   */
+  async accountName(Account) {
+    const { data } = await api.get(
+      `/acct/acc_name.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}&Account=${Account}`,
+    );
+
+    const result = ResponseData({
+      original: data,
+      object: {},
     });
 
     return Response({

@@ -9,6 +9,7 @@ const pmoa = new Pmoa(
   {
     AccountID: process.env.AccountID,
     PassPhrase: process.env.PASSPHRASE,
+
   },
   {
     proxy: new ProxyAdapter(new SocksAdapter(process.env.SOCKS)),
@@ -17,12 +18,13 @@ const pmoa = new Pmoa(
 
 test("Balance", async () => {
   const asyncMock = jest.fn().mockImplementationOnce(async () => {
-    const result = await pmoa.balance();
+    const account = "E40639523"
+    const result = await pmoa.accountName(account);
 
     // console.log(result);
 
     Promise.resolve(result);
   });
 
-  await asyncMock();
+  const res = await asyncMock();
 });
