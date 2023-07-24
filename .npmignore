@@ -1,4 +1,5 @@
+examples
 tests
 .env.example
-test.config.mjs
+jest.config.mjs
 README.md

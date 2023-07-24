@@ -1,8 +1,8 @@
 {
   "name": "pmoa",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easily manage your PM account through the official API using the pmoa (Perfect money official api) library",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "nodemon src/index",
     "test": "jest --watch"
@@ -29,6 +29,7 @@
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "node-html-parser": "^6.1.5",
+    "pmoa": "^1.0.1",
     "socks-proxy-agent": "^8.0.1"
   }
 }
