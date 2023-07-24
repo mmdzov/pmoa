@@ -16,7 +16,7 @@ const pmoa = new Pmoa(
   },
 );
 
-test("Balance", async () => {
+test("AccountName", async () => {
   const asyncMock = jest.fn().mockImplementationOnce(async () => {
     const account = "E40639523"
     const result = await pmoa.accountName(account);
