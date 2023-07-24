@@ -15,12 +15,11 @@ const pmoa = new Pmoa(
   },
 );
 
-test("e-voucher activate", async () => {
+test("e-voucher creation", async () => {
   const asyncMock = jest.fn().mockImplementationOnce(async () => {
-    const result = await pmoa.eVoucherActive({
-      PAYEE_ACCOUNT: "U41708332",
-      EV_NUMBER: "0302162725",
-      EV_CODE: "6502824637305897",
+    const result = await pmoa.eVoucherCreate({
+      PAYER_ACCOUNT: "U41708332",
+      AMOUNT: "0.50",
     });
 
     Promise.resolve(result);
