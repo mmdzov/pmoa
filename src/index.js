@@ -168,6 +168,34 @@ In case of success you will get e-Voucher nominal amount back to account you use
       data: result,
     });
   }
+
+  /**
+   * @description protection code confirmation
+   * @param {string} BATCH   - Perfect Money® batch number of transaction you want to confirm with protection code.
+Must  be numerical value. **Example: 758094**
+   * @param {string} CODE   - Perfect Money® protection code entered by payer of this transaction.
+Can  be alpha-numerical string of length from 1 to 20 chars. **Example: somecode321**
+   * @returns {object} 
+   */
+  async protection({ BATCH, CODE }) {
+    const { data } = await api.get(
+      `/acct/protection.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}&batch=${BATCH}&code=${CODE}`,
+    );
+    const root = parse(data);
+
+    const result = ResponseData({
+      original: data,
+      object: {},
+    });
+
+    root.querySelectorAll("input[type='hidden']").forEach((item) => {
+      result.object[item.getAttribute("name")] = item.getAttribute("value");
+    });
+
+    return Response({
+      data: result,
+    });
+  }
 }
 
 module.exports = Pmoa;
