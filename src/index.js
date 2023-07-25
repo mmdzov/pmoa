@@ -1,6 +1,6 @@
 const api = require("./api");
 const { parse } = require("node-html-parser");
-const { Response, ResponseData } = require("./utils");
+const { Response, ResponseData, htmlToData } = require("./utils");
 const { ProxyAdapter } = require("./proxy");
 require("dotenv").config();
 
@@ -33,15 +33,9 @@ class Pmoa {
       `/acct/balance.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}`,
     );
 
-    const root = parse(data);
-
     const result = ResponseData({
       original: data,
-      object: {},
-    });
-
-    root.querySelectorAll("input[type='hidden']").forEach((item) => {
-      result.object[item.getAttribute("name")] = item.getAttribute("value");
+      object: htmlToData(data),
     });
 
     return Response({
@@ -81,15 +75,9 @@ class Pmoa {
       `/acct/ev_activate.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}&Payee_Account=${PAYEE_ACCOUNT}&ev_number=${EV_NUMBER}&ev_code=${EV_CODE}`,
     );
 
-    const root = parse(data);
-
     const result = ResponseData({
       original: data,
-      object: {},
-    });
-
-    root.querySelectorAll("input[type='hidden']").forEach((item) => {
-      result.object[item.getAttribute("name")] = item.getAttribute("value");
+      object: htmlToData(data),
     });
 
     return Response({
@@ -109,15 +97,9 @@ As a result e-Voucher of this nominal will be created. **Example: 19.95**
       `/acct/ev_create.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}&Payer_Account=${PAYER_ACCOUNT}&Amount=${AMOUNT}`,
     );
 
-    const root = parse(data);
-
     const result = ResponseData({
       original: data,
-      object: {},
-    });
-
-    root.querySelectorAll("input[type='hidden']").forEach((item) => {
-      result.object[item.getAttribute("name")] = item.getAttribute("value");
+      object: htmlToData(data),
     });
 
     return Response({
@@ -153,15 +135,9 @@ In case of success you will get e-Voucher nominal amount back to account you use
     const { data } = await api.get(
       `/acct/ev_remove.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}&Payer_Account=${PAYER_ACCOUNT}&ev_number=${EV_NUMBER}`,
     );
-    const root = parse(data);
-
     const result = ResponseData({
       original: data,
-      object: {},
-    });
-
-    root.querySelectorAll("input[type='hidden']").forEach((item) => {
-      result.object[item.getAttribute("name")] = item.getAttribute("value");
+      object: htmlToData(data),
     });
 
     return Response({
@@ -181,15 +157,9 @@ Can  be alpha-numerical string of length from 1 to 20 chars. **Example: somecode
     const { data } = await api.get(
       `/acct/protection.asp?AccountID=${this.args.AccountID}&PassPhrase=${this.args.PassPhrase}&batch=${BATCH}&code=${CODE}`,
     );
-    const root = parse(data);
-
     const result = ResponseData({
       original: data,
-      object: {},
-    });
-
-    root.querySelectorAll("input[type='hidden']").forEach((item) => {
-      result.object[item.getAttribute("name")] = item.getAttribute("value");
+      object: htmlToData(data),
     });
 
     return Response({
@@ -228,22 +198,16 @@ Must be integer value from 1 to 365 days. **Example: 3**
         MEMO ?? ""
       }&PAYMENT_ID=${PAYMENT_ID ?? ""}&code=${CODE ?? ""}&Priod=${PRIOD ?? ""}`,
     );
-    const root = parse(data);
-
     const result = ResponseData({
       original: data,
-      object: {},
-    });
-
-    root.querySelectorAll("input[type='hidden']").forEach((item) => {
-      result.object[item.getAttribute("name")] = item.getAttribute("value");
+      object: htmlToData(data),
     });
 
     return Response({
       data: result,
     });
   }
- 
+
   /**
    * @description spend preview/verification. This preview / verification function might be used to check the validity of a potential spend prior to executing it. Note that posting to this location does not actually perform any transfer of Perfect Money®.
    * @param {string} PAYER_ACCOUNT   - Your Perfect Money® account to spend from. **Example: U1234567**
@@ -275,15 +239,9 @@ Must be integer value from 1 to 365 days. **Example: 3**
         MEMO ?? ""
       }&PAYMENT_ID=${PAYMENT_ID ?? ""}&code=${CODE ?? ""}&Priod=${PRIOD ?? ""}`,
     );
-    const root = parse(data);
-
     const result = ResponseData({
       original: data,
-      object: {},
-    });
-
-    root.querySelectorAll("input[type='hidden']").forEach((item) => {
-      result.object[item.getAttribute("name")] = item.getAttribute("value");
+      object: htmlToData(data),
     });
 
     return Response({
