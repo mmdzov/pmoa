@@ -1,6 +1,6 @@
 {
   "name": "pmoa",
-  "version": "1.0.2",
+  "version": "2.1.0",
   "description": "Easily manage your PM account through the official API using the pmoa (Perfect money official api) library",
   "main": "src/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/mmdzov/pmoa.git"
   },
-  "keywords": [],
+  "keywords": ["perfect-money","perfectmoney","api","exchange","voucher"],
   "author": "mmdzov",
   "license": "MIT",
   "bugs": {
