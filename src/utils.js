@@ -7,3 +7,4 @@ const ResponseData = (args = { original, object: {} }) => ({
 });
 
 module.exports = { Response, ResponseData };
+
