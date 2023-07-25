@@ -196,6 +196,53 @@ Can  be alpha-numerical string of length from 1 to 20 chars. **Example: somecode
       data: result,
     });
   }
+
+  /**
+   * @description spend
+   * @param {string} PAYER_ACCOUNT   - Your Perfect Money® account to spend from. **Example: U1234567**
+   * @param {string} PAYEE_ACCOUNT   - Perfect Money® account to spend to. **Example: U7654321**
+   * @param {string} AMOUNT   - Amount to be spent. Must be positive numerical amount. **Example: 19.95**
+   * @param {string} MEMO   - Up to 100 characters to be placed in memo section of transaction. The memo is visible to both payer and payee. **Example: Thanks for dinner.**
+   * @param {string} PAYMENT_ID   - Optional merchant reference number. If present, this string of up to 50 characters is placed in the transaction. Payer and/or payee may search/query account history for this value. **Example: ID-322223**
+   * @param {string} CODE   - (Optional) Pass this value if only you want to use transfer protection code. If protection code is present, payee must enter this code to get money to his/her account.
+Must  be alpha-numerical string of length from 1 to 20 chars. **Example: mycode123**
+   * @param {string} PRIOD   - (Optional) You need to pass this value if only you want to use transfer protection code.
+Number of days you want your transfer with protection code to be valid. If payee does not enter protection code during this period, money will be transferred back to your account.
+Must be integer value from 1 to 365 days. **Example: 3**
+
+   * @returns {object} 
+   */
+  async spend({
+    PAYER_ACCOUNT,
+    PAYEE_ACCOUNT,
+    AMOUNT,
+    MEMO,
+    PAYMENT_ID,
+    CODE,
+    PRIOD,
+  }) {
+    const { data } = await api.get(
+      `/acct/confirm.asp?AccountID=${this.args.AccountID}&PassPhrase=${
+        this.args.PassPhrase
+      }&Payer_Account=${PAYER_ACCOUNT}&Payee_Account=${PAYEE_ACCOUNT}&Amount=${AMOUNT}&Memo=${
+        MEMO ?? ""
+      }&PAYMENT_ID=${PAYMENT_ID ?? ""}&code=${CODE ?? ""}&Priod=${PRIOD ?? ""}`,
+    );
+    const root = parse(data);
+
+    const result = ResponseData({
+      original: data,
+      object: {},
+    });
+
+    root.querySelectorAll("input[type='hidden']").forEach((item) => {
+      result.object[item.getAttribute("name")] = item.getAttribute("value");
+    });
+
+    return Response({
+      data: result,
+    });
+  }
 }
 
 module.exports = Pmoa;
